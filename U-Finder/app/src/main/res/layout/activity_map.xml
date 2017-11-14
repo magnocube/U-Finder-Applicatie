@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ml.u_finder.u_finder.MenuActivity"
+    android:background="@drawable/background_inloggen">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/locatie"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
+        android:contentDescription="test"
+        android:src="@drawable/logo_ufinder"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+
+
+
+</RelativeLayout>

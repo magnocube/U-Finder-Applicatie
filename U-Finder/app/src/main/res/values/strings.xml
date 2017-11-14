@@ -1,0 +1,16 @@
+<resources>
+    //Login
+    <string name="app_name">U-Finder</string>
+
+    //Menu
+    <string name="Locatie_button">Locatie</string>
+    <string name="Alarm_button">Alarm</string>
+    <string name="Logout_button">Logout</string>
+
+
+    //Admin
+    <string name="EditBeacon_button">Edit Beacons</string>
+    <string name="EditGebruikers_button">Edit Gebruikers</string>
+    <string name="EditKaart_button">Edit Kaart</string>
+
+</resources>
