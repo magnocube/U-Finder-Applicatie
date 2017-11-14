@@ -31,7 +31,7 @@ public class UWBServer {
 		json = jsonReader.readObject();
 		jsonReader.close();
 
-		if (json.get(responce).toString().equalsIgnoreCase("true")) {
+		if (json.get("loginReply").toString().replace("\"","").equalsIgnoreCase("true")) {
 			return true;
 		}
 		return false;
@@ -59,6 +59,7 @@ public class UWBServer {
 			out.writeUTF(data);
 
 			responce = in.readUTF();
+			System.out.println(responce);
 			client.close();
 		} catch (IOException e) {
 			return null;
