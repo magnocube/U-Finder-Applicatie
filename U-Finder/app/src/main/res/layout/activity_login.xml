@@ -61,4 +61,13 @@
            android:textColor="@color/Dark_Grey"
            android:visibility="invisible" />
 
-   </RelativeLayout>
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/wachtwoord"
+        android:layout_alignStart="@+id/wachtwoord"
+        android:layout_centerVertical="true"
+        android:text="Login" />
+
+</RelativeLayout>

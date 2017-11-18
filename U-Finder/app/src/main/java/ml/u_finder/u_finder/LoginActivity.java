@@ -1,6 +1,7 @@
 package ml.u_finder.u_finder;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends Activity {
-    private String userName = "Brad";
-    private String password = "Test";
     private TextView user;
     private TextView passwd;
     private TextView ErrorField;
-
+    private Button loginButton;
+    private LoginThread thread;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,14 @@ public class LoginActivity extends Activity {
         user = (TextView) findViewById(R.id.gebruiksnaam);
         passwd = (TextView) findViewById(R.id.wachtwoord);
         ErrorField = (TextView) findViewById(R.id.ErrorField);
+        loginButton = (Button) findViewById(R.id.LoginButton);
+        progressDialog = new ProgressDialog(this);
+
+        progressDialog.setTitle("Please wait..");
+        progressDialog.setMessage("Loading");
+
+
+        /*
 
         passwd.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -54,9 +63,32 @@ public class LoginActivity extends Activity {
                 return handled;
             }
         });
+        */
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog.show();
+               thread = new LoginThread(user.getText().toString(), passwd.getText().toString(), LoginActivity.this);
+               thread.start();
+
+            }
+        });
 
 
     }
+
+    public void succesLogin(){
+        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+        this.finish();
+
+        progressDialog.cancel();
+    }
+
+    public void loginFail(){
+
+        progressDialog.cancel();
+    }
+
 }
 
 

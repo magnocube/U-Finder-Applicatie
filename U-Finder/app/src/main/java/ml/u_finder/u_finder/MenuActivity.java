@@ -32,6 +32,7 @@ public class MenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                     startActivity(new Intent(MenuActivity.this, LoginActivity.class));
+                    MenuActivity.this.finish();
             }
         });
 
@@ -41,7 +42,7 @@ public class MenuActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                //button_locatie.setBackground(buttonshape_pressed);
+               startActivity(new Intent(MenuActivity.this, MapActivity.class));
 
             }
         });
