@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,11 +15,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="136dp"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:backgroundTint="@color/Green"
         android:ems="10"
         android:gravity="center"
-        android:hint="Gebruiksnaam"
-        android:inputType="textPersonName" />
+        android:hint="@string/usrn"
+        android:inputType="textPersonName"
+        android:textColor="@color/Black"
+        />
 
     <EditText
         android:id="@+id/wachtwoord"
@@ -33,9 +32,10 @@
         android:layout_marginTop="26dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Wachtwoord"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:hint="@string/ww"
+        android:backgroundTint="@color/Green"
         android:inputType="textPassword"
+        android:textColor="@color/Black"
         />
 
 
@@ -49,25 +49,29 @@
         android:scaleType="matrix"
         android:src="@drawable/logo_ufinder" />
 
-       <TextView
-           android:id="@+id/ErrorField"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_above="@+id/wachtwoord"
-           android:layout_centerHorizontal="true"
-           android:layout_marginBottom="52dp"
-           android:text="Probeer opnieuw"
-           android:textAppearance="@style/TextAppearance.AppCompat.Large"
-           android:textColor="@color/Dark_Grey"
-           android:visibility="invisible" />
+    <TextView
+        android:id="@+id/ErrorField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:text="@string/opnieuw"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/Green"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/LoginButton"
-        android:layout_width="wrap_content"
+        style="@android:style/Widget.Button.Toggle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/wachtwoord"
         android:layout_alignStart="@+id/wachtwoord"
-        android:layout_centerVertical="true"
-        android:text="Login" />
+        android:layout_below="@+id/wachtwoord"
+        android:layout_marginTop="17dp"
+        android:text="@string/login"
+        android:textColor="@color/Green"
+        />
 
 </RelativeLayout>

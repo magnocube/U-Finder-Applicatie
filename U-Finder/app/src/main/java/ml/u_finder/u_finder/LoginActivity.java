@@ -85,7 +85,10 @@ public class LoginActivity extends Activity {
     }
 
     public void loginFail(){
-
+        ErrorField.setVisibility(1);
+        user.setText("");
+        user.requestFocus();
+        passwd.setText("");
         progressDialog.cancel();
     }
 

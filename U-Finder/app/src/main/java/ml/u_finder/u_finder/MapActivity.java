@@ -36,7 +36,7 @@ public class MapActivity extends Activity {
         progressDialog = new ProgressDialog(this);
 
         progressDialog.setTitle("Please wait..");
-        progressDialog.setMessage("Loading");
+        progressDialog.setMessage("Loading map");
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
