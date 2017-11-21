@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Surface;
@@ -20,9 +21,12 @@ public class MapActivity extends Activity {
     private Button mapButton;
     private ImageView kaart;
     private MapThread thread;
+
     private ProgressDialog progressDialog;
-    private Button live;
+    private Bitmap stockMap;
     private Canvas canvas;
+    private int[] colors ;
+    private Paint paint;
 
     private Bitmap bitmapMutable;
 
@@ -30,6 +34,11 @@ public class MapActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        colors = new int[4];
+        colors[0] = Color.GREEN;
+        colors[1] = Color.BLUE;
+        colors[2] = Color.WHITE;
+        colors[3] = Color.RED;
 
         mapButton = (Button) findViewById(R.id.GetKaart);
         kaart = (ImageView) findViewById(R.id.Kaart);
@@ -37,6 +46,8 @@ public class MapActivity extends Activity {
 
         progressDialog.setTitle("Please wait..");
         progressDialog.setMessage("Loading map");
+
+
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,18 +60,11 @@ public class MapActivity extends Activity {
     }
 
     public void setImage(Bitmap image){
-        bitmapMutable = image.copy(Bitmap.Config.ARGB_8888, true);
-
-
-
-        Paint paint = new Paint();
-
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
+        stockMap = image;
+        bitmapMutable = stockMap.copy(Bitmap.Config.ARGB_8888, true);
 
         canvas = new Canvas(bitmapMutable);
-        canvas.drawCircle(159, 120, 15, paint);
-        kaart.setAdjustViewBounds(true);
+
         kaart.setImageBitmap(bitmapMutable);
 
 
@@ -70,4 +74,22 @@ public class MapActivity extends Activity {
 
         progressDialog.cancel();
     }
+
+    public void track(int x, int y, int i){
+
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(colors[i]);
+
+
+        canvas.drawCircle(x, y, 15, paint);
+        kaart.setAdjustViewBounds(true);
+        kaart.setImageBitmap(bitmapMutable);
+    }
+
+    public void repeat(){
+        setImage(stockMap);
+    }
+
+
 }
