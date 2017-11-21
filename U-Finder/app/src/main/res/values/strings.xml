@@ -12,6 +12,8 @@
     <string name="EditBeacon_button">Edit Beacons</string>
     <string name="EditGebruikers_button">Edit Gebruikers</string>
     <string name="EditKaart_button">Edit Kaart</string>
+    <string name="AddUser">Gebruikers aanpassen</string>
+
 
 
 </resources>

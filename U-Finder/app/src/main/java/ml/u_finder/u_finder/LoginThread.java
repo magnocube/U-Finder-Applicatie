@@ -22,6 +22,7 @@ public class LoginThread extends Thread {
 
         if (server.login(user, password)){
             //Log.v("Raber", ""+login );
+
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {

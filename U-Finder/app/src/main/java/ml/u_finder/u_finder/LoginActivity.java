@@ -84,6 +84,8 @@ public class LoginActivity extends Activity {
         progressDialog.cancel();
     }
 
+
+
     public void loginFail(){
         ErrorField.setVisibility(View.VISIBLE);
         user.setText("");

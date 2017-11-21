@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class MenuActivity extends Activity {
     private Button button_logout;
     private Button button_locatie;
-    private Button button_alarm;
+
 
 
 
@@ -24,7 +24,6 @@ public class MenuActivity extends Activity {
 
         button_logout = (Button)findViewById(R.id.Logout);
         button_locatie = (Button)findViewById(R.id.locatie);
-        button_alarm = (Button)findViewById(R.id.alarm);
 
 
         //logout button
