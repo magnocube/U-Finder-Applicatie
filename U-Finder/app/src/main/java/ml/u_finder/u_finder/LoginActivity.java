@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
     }
 
     public void loginFail(){
-        ErrorField.setVisibility(1);
+        ErrorField.setVisibility(View.VISIBLE);
         user.setText("");
         user.requestFocus();
         passwd.setText("");
