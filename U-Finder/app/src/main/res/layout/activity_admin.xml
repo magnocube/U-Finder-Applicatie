@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ml.u_finder.u_finder.AdminActivity"
+    android:background="@drawable/background_inloggen">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/locatie"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_ufinder"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="130dp" />
+
+    <Button
+        android:id="@+id/addUser"
+        style="@android:style/Widget.Button.Toggle"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/EditGebruikers_button"
+        android:textColor="@color/Green"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/Logout"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="22dp"
+        android:hapticFeedbackEnabled="true"
+        android:textColor="@color/Green"
+        android:text="@string/Logout_button"
+        />
+
+</RelativeLayout>

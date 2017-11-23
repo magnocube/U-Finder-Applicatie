@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">U-Finder</string>
+    <string name="ww">Wachtwoord</string>
+    <string name="usrn">Gebruikersnaam</string>
+    <string name="login">Login</string>
+    <string name="opnieuw">Probeer opnieuw</string>
+    <string name="Locatie_button">Locatie</string>
+    <string name="Alarm_button">Alarm</string>
+    <string name="Logout_button">Logout</string>
+    <string name="Getlocation">Get Location</string>
+    <string name="Startstop">Start/Stop</string>
+    <string name="EditBeacon_button">Edit Beacons</string>
+    <string name="EditGebruikers_button">Edit Gebruikers</string>
+    <string name="EditKaart_button">Edit Kaart</string>
+    <string name="AddUser">Gebruikers aanpassen</string>
+
+
+
+</resources>

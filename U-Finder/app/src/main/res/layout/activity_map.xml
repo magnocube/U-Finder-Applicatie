@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ml.u_finder.u_finder.MenuActivity"
+    android:background="@drawable/background_inloggen">
+
+
+
+
+    <ImageView
+        android:id="@+id/Kaart"
+        android:layout_width="383dp"
+        android:layout_height="494dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_ufinder" />
+
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add 'Apple' To Spinner"
+        />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
+</RelativeLayout>

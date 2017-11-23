@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ml.u_finder.u_finder.MenuActivity"
+    android:background="@drawable/background_inloggen">
+
+
+    <EditText
+        android:id="@+id/gebruiksnaam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="136dp"
+        android:backgroundTint="@color/Green"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/usrn"
+        android:inputType="textPersonName"
+        android:textColor="@color/Black"
+        />
+
+    <EditText
+        android:id="@+id/wachtwoord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gebruiksnaam"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/ww"
+        android:backgroundTint="@color/Green"
+        android:inputType="textPassword"
+        android:textColor="@color/Black"
+        />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wachtwoord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="119dp"
+        android:scaleType="matrix"
+        android:src="@drawable/logo_ufinder" />
+
+    <TextView
+        android:id="@+id/ErrorField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:text="@string/opnieuw"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/Green"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/LoginButton"
+        style="@android:style/Widget.Button.Toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/wachtwoord"
+        android:layout_alignStart="@+id/wachtwoord"
+        android:layout_below="@+id/wachtwoord"
+        android:layout_marginTop="17dp"
+        android:text="@string/login"
+        android:textColor="@color/Green"
+        />
+
+</RelativeLayout>
