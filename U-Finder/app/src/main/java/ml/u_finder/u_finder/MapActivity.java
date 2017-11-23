@@ -106,4 +106,12 @@ public class MapActivity extends Activity {
     public void repeat(){
         setImage(stockMap);
     }
+
+
+    public void onPause()
+    {
+     super.onPause();
+     thread.setTracking(false);
+    }
+
 }

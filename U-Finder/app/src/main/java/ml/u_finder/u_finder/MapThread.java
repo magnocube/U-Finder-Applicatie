@@ -14,13 +14,16 @@ public class MapThread extends Thread {
     private MapActivity activity;
     private Bitmap image;
     private Coordinates coordinates;
+    private Boolean tracking;
     private final UWBServer server = new UWBServer("77.172.10.240",8379);
     public MapThread(String room, MapActivity mapActivity){
         this.room = room;
         this.activity = mapActivity;
+        this.tracking = true;
     }
 
     public void run(){
+
         Log.v("Raber", ""+room);
         image = server.getImage(room);
 
@@ -34,7 +37,7 @@ public class MapThread extends Thread {
         }
         Log.v("Raber", "Picture geplaats");
 
-        while (true){
+        while (tracking){
             coordinates = server.getCoordinates(room);
 
 
@@ -66,8 +69,20 @@ public class MapThread extends Thread {
                 }
             });
 
+            if (!tracking){
+                break;
+            }
+
 
         }
 
+    }
+
+    public void setTracking(Boolean tracking) {
+        this.tracking = tracking;
+    }
+
+    public Boolean getTracking() {
+        return tracking;
     }
 }
