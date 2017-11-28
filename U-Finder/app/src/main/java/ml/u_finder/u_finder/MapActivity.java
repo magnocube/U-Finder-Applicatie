@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -84,23 +85,35 @@ public class MapActivity extends Activity {
         kaart.setImageBitmap(bitmapMutable);
 
 
-        if (image.getWidth() > image.getHeight()){
-            kaart.setRotation(90);
+        if (!(image.getWidth() > image.getHeight())){
+            kaart.setRotation(-90);
         }
 
         progressDialog.cancel();
     }
 
-    public void track(int x, int y, int i){
+    public void track(int x, int y, String name, int i){
 
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(colors[i]);
+        try {
 
+            paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setColor(Color.BLUE);
+            paint.setTextSize(kaart.getWidth()/18);
 
-        canvas.drawCircle(x, y, 15, paint);
-        kaart.setAdjustViewBounds(true);
-        kaart.setImageBitmap(bitmapMutable);
+            int deelWaarde = (kaart.getWidth()*kaart.getHeight())/15;
+            int radius = (kaart.getWidth()*kaart.getHeight())/deelWaarde;
+
+            canvas.drawCircle(x, y, radius, paint);
+
+            canvas.drawText(name, (x - radius) , (y - radius), paint);
+            kaart.setAdjustViewBounds(true);
+            kaart.setImageBitmap(bitmapMutable);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.v("Raber", "failed to track");
+        }
     }
 
     public void repeat(){
