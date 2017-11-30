@@ -19,13 +19,22 @@ public class MapThread extends Thread {
     public MapThread(String room, MapActivity mapActivity){
         this.room = room;
         this.activity = mapActivity;
-        this.tracking = true;
+
     }
 
     public void run(){
 
         Log.v("Raber", ""+room);
-        image = server.getImage(room);
+
+        try {
+            image = server.getImage(room);
+            this.tracking = true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.v("Raber", "failed to get map");
+            this.tracking = false;
+        }
 
         if (image != null){
             new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -38,8 +47,16 @@ public class MapThread extends Thread {
         Log.v("Raber", "Picture geplaats");
 
         while (tracking){
-            coordinates = server.getCoordinates(room);
 
+            try {
+                coordinates = server.getCoordinates(room);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                Log.v("Raber", "No cordinates");
+                this.tracking = false;
+                break;
+            }
 
 
             for (int i = 0 ; i < coordinates.getSize(); i++ ){
