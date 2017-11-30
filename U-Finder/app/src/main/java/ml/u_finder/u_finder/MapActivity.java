@@ -29,40 +29,16 @@ public class MapActivity extends Activity {
     private Bitmap stockMap;
     private Paint paint;
     private Bitmap bitmapMutable;
-    private int[] colors ;
+    private String[] Users;
+    private Spinner dropdown;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        colors = new int[4];
-        colors[0] = Color.GREEN;
-        colors[1] = Color.BLUE;
-        colors[2] = Color.WHITE;
-        colors[3] = Color.RED;
-
-        Button btn = (Button) findViewById(R.id.btn);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String[] plants = new String[]{
-                "Test1",
-                "Test2"
-        };
-        final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
-
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this,R.layout.spinner_item,plantsList);
-
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(spinnerArrayAdapter);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plantsList.add("Apple");
-                spinnerArrayAdapter.notifyDataSetChanged();
-            }
-        });
+        dropdown = (Spinner) findViewById(R.id.spinner);
 
 
         kaart = (ImageView) findViewById(R.id.Kaart);
@@ -125,6 +101,23 @@ public class MapActivity extends Activity {
     {
      super.onPause();
      thread.setTracking(false);
+    }
+
+    public void FillUsers(String usr,int i)
+    {
+        Users[i] = usr;
+    }
+
+    public void SetIndex(int index)
+    {
+        Users = new String[index];
+
+    }
+
+    public void CreateSpinner()
+    {
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Users);
+        dropdown.setAdapter(adapter);
     }
 
 }

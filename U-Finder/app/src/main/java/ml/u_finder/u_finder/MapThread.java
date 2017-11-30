@@ -50,6 +50,12 @@ public class MapThread extends Thread {
 
             try {
                 coordinates = server.getCoordinates(room);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                      activity.SetIndex(coordinates.getSize());
+                    }
+                });
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -65,12 +71,19 @@ public class MapThread extends Thread {
                     @Override
                     public void run() {
                         activity.track(coordinates.getX(i2), coordinates.getY(i2),coordinates.getName(i2), i2);
+                        activity.FillUsers(coordinates.getName(i2),i2);
                         Log.v("Raber", coordinates.getX(i2)+" "+coordinates.getY(i2));
                     }
                 });
             }
 
 
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                activity.CreateSpinner();
+                }
+            });
 
             try {
                 sleep(2000);
