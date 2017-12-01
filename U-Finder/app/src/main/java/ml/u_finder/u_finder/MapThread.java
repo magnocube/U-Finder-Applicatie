@@ -54,7 +54,19 @@ public class MapThread extends Thread {
                     @Override
                     public void run() {
                       activity.SetIndex(coordinates.getSize());
+
+                        for (int i = 0 ; i < coordinates.getSize(); i++ ){
+                            final int i2=i;
+
+                            activity.FillUsers(coordinates.getName(i2), i2);
+
+                            Log.v("Raber", coordinates.getName(i2)+" has been added");
+                        }
+
+                        activity.CreateSpinner();
+
                     }
+
                 });
             }
             catch (Exception e){
@@ -63,6 +75,7 @@ public class MapThread extends Thread {
                 this.tracking = false;
                 break;
             }
+
 
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
@@ -141,4 +154,6 @@ public class MapThread extends Thread {
     public Boolean getTracking() {
         return tracking;
     }
+
+
 }

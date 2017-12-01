@@ -95,10 +95,6 @@ public class MapActivity extends Activity {
         }
     }
 
-    public void trackPersoon(String persoon){
-
-
-    }
 
     public void repeat(){
         setImage(stockMap);
