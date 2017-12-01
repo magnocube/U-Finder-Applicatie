@@ -50,6 +50,9 @@ public class MapActivity extends Activity {
         progressDialog.show();
         thread = new MapThread("room1", MapActivity.this);
         thread.start();
+
+
+
     }
 
     public void setImage(Bitmap image){
@@ -68,7 +71,7 @@ public class MapActivity extends Activity {
         progressDialog.cancel();
     }
 
-    public void track(int x, int y, String name, int i){
+    public void track(int x, int y, String name){
 
         try {
 
@@ -92,6 +95,11 @@ public class MapActivity extends Activity {
         }
     }
 
+    public void trackPersoon(String persoon){
+
+
+    }
+
     public void repeat(){
         setImage(stockMap);
     }
@@ -105,12 +113,14 @@ public class MapActivity extends Activity {
 
     public void FillUsers(String usr,int i)
     {
-        Users[i] = usr;
+
+        Users[i+1]= usr;
     }
 
     public void SetIndex(int index)
     {
-        Users = new String[index];
+        Users = new String[index+1];
+        Users[0] = "Iedereen";
 
     }
 
@@ -118,6 +128,10 @@ public class MapActivity extends Activity {
     {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Users);
         dropdown.setAdapter(adapter);
+    }
+
+    public String getSelectedSpinner(){
+        return dropdown.getSelectedItem().toString();
     }
 
 }
