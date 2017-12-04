@@ -15,16 +15,19 @@ public class MapThread extends Thread {
     private Bitmap image;
     private Coordinates coordinates;
     private Boolean tracking;
+    private String person;
     private final UWBServer server = new UWBServer("77.172.10.240",8379);
     public MapThread(String room, MapActivity mapActivity){
         this.room = room;
         this.activity = mapActivity;
+        this.person = "Iedereen";
 
     }
 
     public void run(){
 
         Log.v("Raber", ""+room);
+
 
         try {
             image = server.getImage(room);
@@ -46,28 +49,36 @@ public class MapThread extends Thread {
         }
         Log.v("Raber", "Picture geplaats");
 
+
+        coordinates = server.getCoordinates(room);
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+
+                activity.SetIndex(coordinates.getSize());
+
+
+                for (int i = 0; i < coordinates.getSize(); i++) {
+                    final int i2 = i;
+
+                    activity.FillUsers(coordinates.getName(i2), i2);
+
+                    Log.v("Raber", coordinates.getName(i2) + " has been added");
+                }
+
+                activity.CreateSpinner();
+
+
+
+            }
+
+        });
+
         while (tracking){
 
             try {
                 coordinates = server.getCoordinates(room);
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                      activity.SetIndex(coordinates.getSize());
 
-                        for (int i = 0 ; i < coordinates.getSize(); i++ ){
-                            final int i2=i;
-
-                            activity.FillUsers(coordinates.getName(i2), i2);
-
-                            Log.v("Raber", coordinates.getName(i2)+" has been added");
-                        }
-
-                        activity.CreateSpinner();
-
-                    }
-
-                });
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -76,17 +87,17 @@ public class MapThread extends Thread {
                 break;
             }
 
-
+            if (getPerson() != "Iedereen"){
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
 
-            if (!activity.getSelectedSpinner().equals("Iedereen")){
+
                 for (int i = 0 ; i < coordinates.getSize(); i++ ){
                     final int i2=i;
 
 
-                            if (coordinates.getName(i2).equals(activity.getSelectedSpinner())) {
+                            if (coordinates.getName(i2).equals(getPerson())) {
                                 activity.track(coordinates.getX(i2), coordinates.getY(i2), coordinates.getName(i2));
 
                                 Log.v("Raber", coordinates.getX(i2) + " " + coordinates.getY(i2));
@@ -98,25 +109,21 @@ public class MapThread extends Thread {
 
 
                 }
-
-
-            }
-
             });
-
-
-            for (int i = 0 ; i < coordinates.getSize(); i++ ){
-                final int i2=i;
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        activity.track(coordinates.getX(i2), coordinates.getY(i2),coordinates.getName(i2));
-
-                        Log.v("Raber", coordinates.getX(i2)+" "+coordinates.getY(i2));
-                    }
-                });
             }
+            else {
+                for (int i = 0; i < coordinates.getSize(); i++) {
+                    final int i2 = i;
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            activity.track(coordinates.getX(i2), coordinates.getY(i2), coordinates.getName(i2));
 
+                            Log.v("Raber", coordinates.getX(i2) + " " + coordinates.getY(i2));
+                        }
+                    });
+                }
+            }
             try {
                 sleep(2000);
             }
@@ -156,4 +163,11 @@ public class MapThread extends Thread {
     }
 
 
+    public String getPerson() {
+        return person;
+    }
+
+    public void setPerson(String person) {
+        this.person = person;
+    }
 }

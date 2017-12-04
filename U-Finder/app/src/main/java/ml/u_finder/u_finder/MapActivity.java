@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,6 +33,7 @@ public class MapActivity extends Activity {
     private Bitmap bitmapMutable;
     private String[] Users;
     private Spinner dropdown;
+    private Button trackButton;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -42,6 +45,7 @@ public class MapActivity extends Activity {
 
 
         kaart = (ImageView) findViewById(R.id.Kaart);
+        trackButton = (Button) findViewById(R.id.track);
 
         progressDialog = new ProgressDialog(this);
 
@@ -50,6 +54,13 @@ public class MapActivity extends Activity {
         progressDialog.show();
         thread = new MapThread("room1", MapActivity.this);
         thread.start();
+
+        trackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                thread.setPerson(getSelectedSpinner());
+            }
+        });
 
 
 
