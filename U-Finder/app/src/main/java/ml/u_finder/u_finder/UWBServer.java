@@ -27,23 +27,21 @@ public class UWBServer {
     public Boolean login(String uName, String PW) {
         try {
             String data = new JSONObject().put("command", "login").put("uName", uName).put("PW", PW).toString();
-            Log.v("Raber",""+data);
+            Log.v("Raber", "" + data);
 
             String responce = send(data);
 
-            Log.v("Raber",""+responce);
+            Log.v("Raber", "" + responce);
 
             JSONObject json = new JSONObject(responce);
 
 
-
-            if (json.get("loginReply").toString().replace("\"","").equalsIgnoreCase("true")) {
+            if (json.get("loginReply").toString().replace("\"", "").equalsIgnoreCase("true")) {
                 return true;
             }
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Log.v("Raber", "login error");
         }
@@ -58,7 +56,7 @@ public class UWBServer {
         try {
             String data = new JSONObject().put("command", "getCoordinates").put("name", roomName).toString();
             return new Coordinates(send(data));
-        }catch (JSONException e){
+        } catch (JSONException e) {
             Log.v("Raber", "couldnt get coordinates");
             return null;
         }
@@ -78,11 +76,11 @@ public class UWBServer {
             out.writeUTF(data);
 
             responce = in.readUTF();
-            Log.v("Raber",""+responce);
+            Log.v("Raber", "" + responce);
             System.out.println(responce);
             client.close();
         } catch (IOException e) {
-            Log.v("Raber","Io exceptoin");
+            Log.v("Raber", "Io exceptoin");
             return null;
         }
         return responce;
@@ -90,7 +88,6 @@ public class UWBServer {
 
 
     public Bitmap getImage(String ImageName) {
-
 
 
         try {
@@ -109,12 +106,11 @@ public class UWBServer {
             return responce;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.v("Raber","io error");
+            Log.v("Raber", "io error");
             return null;
-        }
-        catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
-            Log.v("Raber","json error");
+            Log.v("Raber", "json error");
             return null;
         }
     }

@@ -15,12 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-
-
 
 
 public class MapActivity extends Activity {
@@ -63,10 +61,9 @@ public class MapActivity extends Activity {
         });
 
 
-
     }
 
-    public void setImage(Bitmap image){
+    public void setImage(Bitmap image) {
         stockMap = image;
         bitmapMutable = stockMap.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -75,70 +72,76 @@ public class MapActivity extends Activity {
         kaart.setImageBitmap(bitmapMutable);
 
 
-        if (!(image.getWidth() > image.getHeight())){
-            kaart.setRotation(-90);
+        if ((image.getWidth() > image.getHeight())) {
+            kaart.setRotation(90);
         }
 
         progressDialog.cancel();
     }
 
-    public void track(int x, int y, String name){
+    public void track(int x, int y, String name) {
 
         try {
 
             paint = new Paint();
             paint.setAntiAlias(true);
             paint.setColor(Color.BLUE);
-            paint.setTextSize(kaart.getWidth()/18);
+            paint.setTextSize(kaart.getWidth() / 18);
 
-            int deelWaarde = (kaart.getWidth()*kaart.getHeight())/15;
-            int radius = (kaart.getWidth()*kaart.getHeight())/deelWaarde;
+            int deelWaarde = (kaart.getWidth() * kaart.getHeight()) / 15;
+            int radius = (kaart.getWidth() * kaart.getHeight()) / deelWaarde;
 
             canvas.drawCircle(x, y, radius, paint);
 
-            canvas.drawText(name, (x - radius) , (y - radius), paint);
+            canvas.drawText(name, (x - radius), (y - radius), paint);
             kaart.setAdjustViewBounds(true);
             kaart.setImageBitmap(bitmapMutable);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Log.v("Raber", "failed to track");
         }
     }
 
 
-    public void repeat(){
+    public void repeat() {
         setImage(stockMap);
     }
 
 
-    public void onPause()
-    {
-     super.onPause();
-     thread.setTracking(false);
+    public void onPause() {
+        super.onPause();
+        thread.setTracking(false);
     }
 
-    public void FillUsers(String usr,int i)
-    {
+    public void FillUsers(String usr, int i) {
 
-        Users[i+1]= usr;
+        Users[i + 1] = usr;
+
     }
 
-    public void SetIndex(int index)
-    {
-        Users = new String[index+1];
+    public void SetIndex(int index) {
+        Users = new String[index + 1];
         Users[0] = "Iedereen";
 
     }
 
-    public void CreateSpinner()
-    {
+    public void CreateSpinner() {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Users);
         dropdown.setAdapter(adapter);
     }
 
-    public String getSelectedSpinner(){
-        return dropdown.getSelectedItem().toString();
+    public String getSelectedSpinner() {
+
+        try {
+            return dropdown.getSelectedItem().toString();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.v("Raber", "No data in dropdown box");
+
+        }
+
+        return "";
     }
 
 }

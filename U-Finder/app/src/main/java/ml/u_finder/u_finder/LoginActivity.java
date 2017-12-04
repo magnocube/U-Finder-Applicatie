@@ -66,8 +66,8 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-               thread = new LoginThread(user.getText().toString(), passwd.getText().toString(), LoginActivity.this);
-               thread.start();
+                thread = new LoginThread(user.getText().toString(), passwd.getText().toString(), LoginActivity.this);
+                thread.start();
 
             }
         });
@@ -75,7 +75,7 @@ public class LoginActivity extends Activity {
 
     }
 
-    public void succesLogin(){
+    public void succesLogin() {
         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
         this.finish();
 
@@ -83,15 +83,13 @@ public class LoginActivity extends Activity {
     }
 
 
-
-    public void loginFail(){
+    public void loginFail() {
         ErrorField.setVisibility(View.VISIBLE);
         user.setText("");
         user.requestFocus();
         passwd.setText("");
         progressDialog.cancel();
     }
-
 
 
 }

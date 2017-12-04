@@ -6,21 +6,21 @@ import android.os.Looper;
 import android.util.Log;
 
 public class LoginThread extends Thread {
+    private final UWBServer server = new UWBServer("77.172.10.240", 8379);
     private String user = null;
     private String password = null;
     private LoginActivity activity;
-    private final UWBServer server = new UWBServer("77.172.10.240",8379);
 
-    public LoginThread(String usr, String passwd, LoginActivity loginActivity){
+    public LoginThread(String usr, String passwd, LoginActivity loginActivity) {
         this.user = usr;
-        this.password= passwd;
+        this.password = passwd;
         this.activity = loginActivity;
     }
 
-    public void run(){
+    public void run() {
 
 
-        if (server.login(user, password)){
+        if (server.login(user, password)) {
             //Log.v("Raber", ""+login );
 
             new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -29,8 +29,7 @@ public class LoginThread extends Thread {
                     activity.succesLogin();
                 }
             });
-        }
-        else {
+        } else {
             //Log.v("Raber", ""+login );
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override

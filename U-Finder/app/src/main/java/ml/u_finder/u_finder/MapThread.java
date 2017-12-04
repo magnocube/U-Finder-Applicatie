@@ -11,38 +11,37 @@ import android.widget.ImageView;
  */
 
 public class MapThread extends Thread {
+    private final UWBServer server = new UWBServer("77.172.10.240", 8379);
     private String room;
     private MapActivity activity;
     private Bitmap image;
     private Coordinates coordinates;
     private Boolean tracking;
     private String person;
-    private final UWBServer server = new UWBServer("77.172.10.240",8379);
-    public MapThread(String room, MapActivity mapActivity){
+
+    public MapThread(String room, MapActivity mapActivity) {
         this.room = room;
         this.activity = mapActivity;
         this.person = "Iedereen";
 
     }
 
-    public void run(){
+    public void run() {
 
 
-
-        Log.v("Raber", ""+room);
+        Log.v("Raber", "" + room);
 
 
         try {
             image = server.getImage(room);
             this.tracking = true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Log.v("Raber", "failed to get map");
             this.tracking = false;
         }
 
-        if (image != null){
+        if (image != null) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
@@ -53,51 +52,55 @@ public class MapThread extends Thread {
         Log.v("Raber", "Picture geplaats");
 
 
-        coordinates = server.getCoordinates(room);
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
+        try {
+            coordinates = server.getCoordinates(room);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
 
-                activity.SetIndex(coordinates.getSize());
+                    activity.SetIndex(coordinates.getSize());
+
+                    for (int i = 0; i < coordinates.getSize(); i++) {
+                        final int i2 = i;
+
+                        activity.FillUsers(coordinates.getName(i2), i2);
+
+                        Log.v("Raber", coordinates.getName(i2) + " has been added");
+                    }
+
+                    activity.CreateSpinner();
 
 
-                for (int i = 0; i < coordinates.getSize(); i++) {
-                    final int i2 = i;
-
-                    activity.FillUsers(coordinates.getName(i2), i2);
-
-                    Log.v("Raber", coordinates.getName(i2) + " has been added");
                 }
 
-                activity.CreateSpinner();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.v("Raber", "No coordinates");
+            this.tracking = false;
 
+        }
 
-
-            }
-
-        });
-
-        while (tracking){
+        while (tracking) {
 
             try {
                 coordinates = server.getCoordinates(room);
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 Log.v("Raber", "No coordinates");
                 this.tracking = false;
                 break;
             }
 
-            if (getPerson() != "Iedereen"){
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
+            if (getPerson() != "Iedereen") {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
 
 
-                for (int i = 0 ; i < coordinates.getSize(); i++ ){
-                    final int i2=i;
+                        for (int i = 0; i < coordinates.getSize(); i++) {
+                            final int i2 = i;
 
 
                             if (coordinates.getName(i2).equals(getPerson())) {
@@ -110,11 +113,9 @@ public class MapThread extends Thread {
                         }
 
 
-
-                }
-            });
-            }
-            else {
+                    }
+                });
+            } else {
                 for (int i = 0; i < coordinates.getSize(); i++) {
                     final int i2 = i;
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -129,8 +130,7 @@ public class MapThread extends Thread {
             }
             try {
                 sleep(2000);
-            }
-            catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -139,8 +139,7 @@ public class MapThread extends Thread {
                 public void run() {
                     try {
                         activity.repeat();
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Log.v("Raber", "Server has stopped working");
                     }
@@ -148,7 +147,7 @@ public class MapThread extends Thread {
                 }
             });
 
-            if (!tracking){
+            if (!tracking) {
                 break;
             }
 
@@ -157,14 +156,13 @@ public class MapThread extends Thread {
 
     }
 
-    public void setTracking(Boolean tracking) {
-        this.tracking = tracking;
-    }
-
     public Boolean getTracking() {
         return tracking;
     }
 
+    public void setTracking(Boolean tracking) {
+        this.tracking = tracking;
+    }
 
     public String getPerson() {
         return person;
