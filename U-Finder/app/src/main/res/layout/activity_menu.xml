@@ -17,6 +17,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="46dp"
         android:contentDescription="@null"
+        android:paddingTop="30dp"
         android:src="@drawable/logo_ufinder"
         android:visibility="visible"
         tools:layout_editor_absoluteX="25dp"

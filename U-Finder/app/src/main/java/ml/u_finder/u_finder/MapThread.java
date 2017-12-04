@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.ImageView;
 
 /**
  * Created by Raber on 11/18/2017.
@@ -25,6 +26,8 @@ public class MapThread extends Thread {
     }
 
     public void run(){
+
+
 
         Log.v("Raber", ""+room);
 
