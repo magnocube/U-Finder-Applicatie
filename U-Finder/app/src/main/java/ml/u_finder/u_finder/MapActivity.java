@@ -126,7 +126,8 @@ public class MapActivity extends Activity {
     }
 
     public void CreateSpinner() {
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Users);
+        adapter = new ArrayAdapter<String>(this, R.layout.spinnertheme, Users);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_theme);
         dropdown.setAdapter(adapter);
     }
 

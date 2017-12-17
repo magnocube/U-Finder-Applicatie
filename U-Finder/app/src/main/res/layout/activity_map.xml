@@ -23,10 +23,22 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignStart="@+id/Kaart"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20px"
         android:layout_below="@+id/Kaart"
-       />
+        android:background="@color/Transparent"
+        android:popupBackground="@color/Transparent" />
+
+    <Spinner
+        android:id="@+id/spinnerRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20px"
+        android:layout_below="@+id/spinner"
+        android:background="@color/Transparent"
+        android:popupBackground="@color/Transparent" />
 
     <Button
         android:id="@+id/track"
@@ -35,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/Green"
         android:text="Track" />
 
 </RelativeLayout>
