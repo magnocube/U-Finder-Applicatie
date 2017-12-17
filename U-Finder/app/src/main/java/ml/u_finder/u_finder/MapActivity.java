@@ -7,18 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MapActivity extends Activity {
@@ -33,10 +27,10 @@ public class MapActivity extends Activity {
     private String[] rooms;
     private Spinner dropdown;
     private Spinner dropDownRooms;
-    private Button trackButton;
-    private Button GetRooms;
+    private Button filter;
+    private Button getRoomsButton;
     private ArrayAdapter<String> adapter;
-    private ArrayAdapter<String> AdapterRooms;
+    private ArrayAdapter<String> adapterRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,25 +38,63 @@ public class MapActivity extends Activity {
         setContentView(R.layout.activity_map);
 
         dropdown = (Spinner) findViewById(R.id.spinner);
-
+        dropDownRooms = (Spinner) findViewById(R.id.spinnerRoom);
 
         kaart = (ImageView) findViewById(R.id.Kaart);
-        trackButton = (Button) findViewById(R.id.track);
+
+        filter = (Button) findViewById(R.id.filter);
+        getRoomsButton = (Button) findViewById(R.id.GetRoom);
 
         progressDialog = new ProgressDialog(this);
 
         progressDialog.setTitle("Please wait..");
         progressDialog.setMessage("Loading map");
-        progressDialog.show();
-        thread = new MapThread("room1", MapActivity.this);
-        thread.start();
 
-        trackButton.setOnClickListener(new View.OnClickListener() {
+
+        rooms = new String[4];
+        rooms[0] = "Verdieping B";
+        rooms[1] = "Verdieping 1";
+        rooms[2] = "Verdieping 2";
+        rooms[3] = "Verdieping 3";
+
+        adapterRooms = new ArrayAdapter<String>(this, R.layout.spinnertheme, rooms);
+        adapterRooms.setDropDownViewResource(R.layout.spinner_dropdown_theme);
+        dropDownRooms.setAdapter(adapterRooms);
+
+        filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                thread.setPerson(getSelectedSpinner());
+                if (thread != null) {
+                    thread.setPerson(getSelectedSpinner());
+                }
             }
         });
+
+        getRoomsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (thread != null) {
+
+                        thread.setTracking(false);
+
+                }
+
+                if (dropDownRooms.getSelectedItem().toString().equals(rooms[0])) {
+                    thread = new MapThread("room1", MapActivity.this);
+                    thread.start();
+                    progressDialog.show();
+                }
+                else {
+                    thread = new MapThread("room13334", MapActivity.this);
+                    thread.start();
+                    progressDialog.show();
+                }
+
+
+            }
+        });
+
 
 
     }
@@ -127,12 +159,15 @@ public class MapActivity extends Activity {
         Users = new String[index + 1];
         Users[0] = "Iedereen";
 
+
     }
 
     public void CreateSpinner() {
         adapter = new ArrayAdapter<String>(this, R.layout.spinnertheme, Users);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_theme);
         dropdown.setAdapter(adapter);
+
+
     }
 
     public String getSelectedSpinner() {
