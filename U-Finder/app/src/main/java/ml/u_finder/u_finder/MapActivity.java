@@ -30,9 +30,13 @@ public class MapActivity extends Activity {
     private Paint paint;
     private Bitmap bitmapMutable;
     private String[] Users;
+    private String[] rooms;
     private Spinner dropdown;
+    private Spinner dropDownRooms;
     private Button trackButton;
+    private Button GetRooms;
     private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> AdapterRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

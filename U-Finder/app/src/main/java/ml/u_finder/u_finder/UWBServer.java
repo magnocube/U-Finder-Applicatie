@@ -91,7 +91,7 @@ public class UWBServer {
 
 
         try {
-            String data = new JSONObject().put("command", "getImage").put("name", ImageName).toString();
+            String data = new JSONObject().put("command", "getImageFast").put("name", ImageName).toString();
 
             System.out.println("sending: " + data);
             Socket client = new Socket(serverName, port);
