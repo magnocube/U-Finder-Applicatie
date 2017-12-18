@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,7 +28,6 @@ public class MapActivity extends Activity {
     private String[] rooms;
     private Spinner dropdown;
     private Spinner dropDownRooms;
-    private Button filter;
 
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapterRooms;
@@ -41,9 +41,6 @@ public class MapActivity extends Activity {
         dropDownRooms = (Spinner) findViewById(R.id.spinnerRoom);
 
         kaart = (ImageView) findViewById(R.id.Kaart);
-
-        filter = (Button) findViewById(R.id.filter);
-
 
         progressDialog = new ProgressDialog(this);
 
@@ -65,14 +62,19 @@ public class MapActivity extends Activity {
         thread.start();
         progressDialog.show();
 
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (thread != null) {
                     thread.setPerson(getSelectedSpinner());
+                    Log.v("Brad", "Tracking:" + getSelectedSpinner());
                 }
             }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
+
+
+
 
 
 
