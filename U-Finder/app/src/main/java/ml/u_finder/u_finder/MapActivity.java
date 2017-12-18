@@ -28,7 +28,7 @@ public class MapActivity extends Activity {
     private Spinner dropdown;
     private Spinner dropDownRooms;
     private Button filter;
-    private Button getRoomsButton;
+
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapterRooms;
 
@@ -43,7 +43,7 @@ public class MapActivity extends Activity {
         kaart = (ImageView) findViewById(R.id.Kaart);
 
         filter = (Button) findViewById(R.id.filter);
-        getRoomsButton = (Button) findViewById(R.id.GetRoom);
+
 
         progressDialog = new ProgressDialog(this);
 
@@ -61,6 +61,10 @@ public class MapActivity extends Activity {
         adapterRooms.setDropDownViewResource(R.layout.spinner_dropdown_theme);
         dropDownRooms.setAdapter(adapterRooms);
 
+        thread = new MapThread("room1", MapActivity.this);
+        thread.start();
+        progressDialog.show();
+
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,30 +74,6 @@ public class MapActivity extends Activity {
             }
         });
 
-        getRoomsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (thread != null) {
-
-                        thread.setTracking(false);
-
-                }
-
-                if (dropDownRooms.getSelectedItem().toString().equals(rooms[0])) {
-                    thread = new MapThread("room1", MapActivity.this);
-                    thread.start();
-                    progressDialog.show();
-                }
-                else {
-                    thread = new MapThread("room13334", MapActivity.this);
-                    thread.start();
-                    progressDialog.show();
-                }
-
-
-            }
-        });
 
 
 
